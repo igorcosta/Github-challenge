@@ -2,8 +2,6 @@
 
 ## Overview
 
---------------------------------------------------------------------------------
-
 This is a simple web app written in Python 3.7+, and uses Flask framework (Python web framework).
 
 ### Features:
@@ -50,8 +48,6 @@ TBD
 ### Contributing
 
 Long-term discussion and bug reports are limited only during the interview with Github. Code reviews are possible, as long are done via Github Pull requests.
-
---------------------------------------------------------------------------------
 
 #### License
 
