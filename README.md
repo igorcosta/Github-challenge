@@ -8,7 +8,7 @@ This is a simple web services app written in Flask (Python web framework), it li
 
 --------------------------------------------------------------------------------
 
-- Git 2.0+ installed on your machine [Download](https://git-scm.com/)
+- [Download](https://git-scm.com/)and install Git 2.x on your machine
 - Python 3.7+ installed in your machine
 - A code editor like [Atom](https://atom.io)
 - [A Github account](https://github.com)
