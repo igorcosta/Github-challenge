@@ -32,11 +32,12 @@ It's super simple web application, doesn't use docker or anything like that, the
 ./ngrok http 8080
 ```
 
-1. Once you have your ngrok tunnel working you will need to start up the **server.py**, which is the main component here.
+1. Once you have your ngrok tunnel working you will need to start the **server.py** server, which is the main component here.
 
 On your terminal window, type the following command.
 
 ```bash
+pip3 install -r requirements.txt
 export FLASK_APP=server.py
 pyton3 -m flask run
 ```
