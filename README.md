@@ -7,8 +7,8 @@ This is a simple web app written in Python 3.7+, and uses Flask framework (Pytho
 ### Features:
 
 - Listens for organization events to know when a repository has been created.
-- When a repository is created under the organisation, triggers an automated process to protect the master branch of the repository using minimum number of pull review.
-- Then notify your Github user account with an @mention using Github issue within the repository, highlights the details of what protection were added to the branch.
+- When a repository is created under the organization, triggers an automated process to protect the master branch of the repository using a minimum number of pull reviews.
+- Then notify your Github user account with an @mention using Github issue within the repository, highlights the details of what protection was added to the branch.
 
 ### Requirements
 
