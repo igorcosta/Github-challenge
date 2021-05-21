@@ -12,9 +12,9 @@ This is a simple web app written in Python 3.7+, and uses Flask framework (Pytho
 
 ### Requirements
 
-- [Download](https://git-scm.com/)and install Git 2.x on your machine
+- [Download](https://git-scm.com/) and install Git 2.x on your machine
 - Python 3.7+ installed in your machine
-- A code editor like [Atom](https://atom.io)
+- A code editor, for example [Atom](https://atom.io)
 - [A Github account](https://github.com)
 - An Github Organisation. _you can create one from your free Github account_
 - [A free Ngrok account](https://ngrok.com/)
