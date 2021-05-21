@@ -5,7 +5,9 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 def respond():
     print(request.json);
+    createGitHubIssue('Issue Title', 'Body text', 'assigned_user', 3, ['bug'])
     return Response(status=200)
+
 
 def createGitHubIssue(title, body=None, assignee=None, milestone=None, labels=None):
     '''Create an issue on github.com using the given parameters.'''
