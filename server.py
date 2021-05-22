@@ -1,30 +1,98 @@
 from flask import Flask, request, Response
+from github import Github
+from flask import request
+import requests
+import json
+import curlify
+import os
 
 app = Flask(__name__)
 
+git_token = os.environ['GITHUB_TOKEN']
+
+repo_name = ''
+default_branch =''
+default_user = 'igorcosta'
+
+issueResponse = """
+
+ Hi %s, the security settings for your main branch has been changed!
+ This will keep your repository safe and maintain a high standards.
+ We included the following changes automatically:
+
+**Changes**:
+
+ - Admin branch protection: You have absolute control over this branch.
+ - Pull request protection: Auto approval of pull requests, requires at least 3 approving reviews.
+
+"""
+
+
+
 @app.route('/webhook', methods=['POST'])
 def respond():
-    print(request.json);
-    createGitHubIssue('Issue Title', 'Body text', 'assigned_user', 3, ['bug'])
+    git_data = request.json;
+    if 'action' in git_data:
+        if git_data['action'] == 'created':
+            if git_data['repository']:
+                repo_name = git_data['repository']['full_name'];
+                default_branch = git_data['repository']['default_branch']
+                createGitHubIssue(repo_name, 'Updated branch rotection', issueResponse, default_user, 'enhancement');
+            createBranchProtection(git_data['repository']['owner']['login'],git_data['repository']['name'], default_branch)
     return Response(status=200)
 
+def createBranchProtection(owner,repo,branch,review_number=3):
+    print("hello igor")
+    url = 'https://api.github.com/repos/{}/{}/branches/{}/protection'.format(owner,repo, branch)
+    print("Protection URL \n\n")
+    print(url)
+    headers = {"Authorization": "token {}".format(git_token), "Accept": "application/vnd.github.luke-cage-preview+json"}
+    data = {
+  "required_status_checks": {
+    "strict": True,
+    "contexts": [
+      "trevis-baby"
+    ]
+  },
+  "enforce_admins": True,
+  "required_pull_request_reviews": {
+    "dismissal_restrictions": {
+      "users": [
+        "users"
+      ],
+      "teams": [
+        "teams"
+      ]
+    },
+    "dismiss_stale_reviews": True,
+    "require_code_owner_reviews": True,
+    "required_approving_review_count": review_number
+  },
+  "restrictions": {
+    "users": [
+      'users'
+    ],
+    "teams": [
+      'teams'
+    ],
+    "apps": [
+      'apps'
+    ]
+  }
+}
+    r = requests.put(url, headers=headers, data=json.dumps(data))
+    print(curlify.to_curl(r.request))
 
-def createGitHubIssue(title, body=None, assignee=None, milestone=None, labels=None):
+
+def createGitHubIssue(repoName, title, body=None, assignee=None, labels=None):
     '''Create an issue on github.com using the given parameters.'''
-    # Our url to create issues via POST
-    url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, REPO_NAME)
-    # Create an authenticated session to create the issue
-    session = requests.session(auth=(USERNAME, PASSWORD))
-    # Create our issue
-    issue = {'title': title,
-             'body': body,
-             'assignee': assignee,
-             'milestone': milestone,
-             'labels': labels}
-    # Add the issue to our repository
-    r = session.post(url, json.dumps(issue))
-    if r.status_code == 201:
-        print 'Successfully created Issue "%s"' % title
-    else:
-        print 'Could not create Issue "%s"' % title
-        print 'Response:', r.content
+    client = Github(git_token)
+    repo = client.get_repo("%s" % (repoName))
+    issue = repo.create_issue(
+        title= title,
+        body= body,
+        assignee= assignee,
+        labels=[
+        repo.get_label(labels)
+    ]
+)
