@@ -1,8 +1,8 @@
-# Github API challenge named API!
+# Github API challenge!
 
 ## Overview
 
-This is a simple webhook handler app written in Python 3.7+ and Flask framework as part of the Github API challenge.
+This is a simple PoC webhook handler app written in Python 3.7+ and Flask framework as part of the Github API challenge.
 
 ### Features:
 
@@ -23,8 +23,9 @@ This is a simple webhook handler app written in Python 3.7+ and Flask framework 
 
 ### Setup your Github
 
-1. Create a personal access token. This script depends on it.
-2. Configure a [Webhook](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks#setting-up-a-webhook)
+1. [Create a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+
+  > This solution depends on it.
 
 ### Local setup
 
@@ -48,9 +49,11 @@ After your ngrok is running you will see in your terminal a unique url, copy the
 
 > **Tip**: _Every time you restart the ngrok you will need to update the url in your Github Webhook, you only need to do that if you're developing locally._
 
-1. Once you have your ngrok tunnel running, you will need to start the **server.py** server, ngrok will point to this local server to accept Github requests.
+Once you have your ngrok tunnel running, you will need to start the **server.py** server, ngrok will point to this local server to accept Github requests.
 
-Open a new terminal window and type the following commands.
+#### Setup Flask to run
+
+1. Open a new terminal window and type the following commands.
 
 ```bash
 pip3 install -r requirements.txt
@@ -73,11 +76,15 @@ If you see the output below, you're all set to go to the next step.
  * Debugger PIN: xxx-xxx-xxx
 ```
 
+2\. Now, let's go back to Github.
+
+In this step you will need to setup the Webhook in your Github Organisation, pointing to your ngrok url, you copied previously..
+
+> [Creating a Webhook on Github Organisation](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks#setting-up-a-webhook) pointing to the Ngrok URL you copied previously.
+
 ### Testing
 
-Let's test our solution.
-
-Open the browser tab at
+Let's test our solution, open a new browser tab/window at
 
 ```bash
 http://localhost:4040/inspect/http
