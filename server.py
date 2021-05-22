@@ -16,7 +16,7 @@ default_user = 'igorcosta'
 
 issueResponse = """
 
- Hi %s, the security settings for your main branch has been changed!
+ Hi @{}, the security settings for your main branch has been changed!
  This will keep your repository safe and maintain a high standards.
  We included the following changes automatically:
 
@@ -25,7 +25,7 @@ issueResponse = """
  - Admin branch protection: You have absolute control over this branch.
  - Pull request protection: Auto approval of pull requests, requires at least 3 approving reviews.
 
-"""
+""".format(default_user)
 
 
 
