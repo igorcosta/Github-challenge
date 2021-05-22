@@ -14,9 +14,9 @@ This is a simple PoC webhook handler app written in Python 3.7+ and Flask framew
 
 - [Download](https://git-scm.com/) and install Git 2.x on your machine
 - Python 3.7+ installed in your machine
-- A code editor, for example [Atom](https://atom.io)
+- A code editor, for example, [Atom](https://atom.io)
 - [A Github account](https://github.com)
-- An Github Organisation. _you can [create one for free](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/creating-a-new-organization-from-scratch)_
+- A Github Organization. _you can [create one for free](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/creating-a-new-organization-from-scratch)_
 - [A free Ngrok account](https://ngrok.com/)
 
 ### Getting started
@@ -78,9 +78,9 @@ If you see the output below, you're all set to go to the next step.
 
 2\. Now, let's go back to Github.
 
-In this step you will need to setup the Webhook in your Github Organisation, pointing to your ngrok url, you copied previously..
+In this step you will need to setup the Webhook in your Github Organization, pointing to your ngrok url, you copied previously..
 
-> [Creating a Webhook on Github Organisation](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks#setting-up-a-webhook) pointing to the Ngrok URL you copied previously.
+> [Creating a Webhook on Github Organization](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks#setting-up-a-webhook) pointing to the Ngrok URL you copied previously.
 
 ### Testing
 
@@ -90,17 +90,17 @@ Let's test our solution, open a new browser tab/window at
 http://localhost:4040/inspect/http
 ```
 
-Now create a new repository in your Github organisation:
+Now create a new repository in your Github organization:
 
 ```bash
 https://github.com/organizations/your-awsome-little-inc/repositories/new
 ```
 
-Replace the value: 'your-awesome-little-inc', with your organisation's name.
+Replace the value: 'your-awesome-little-inc', with your organization's name.
 
 ### Final step:
 
-Congratulations, if you followed the steps so far until here. You will be able to see a new issue with @mention in your repo or any new repo you create under your organisation.
+Congratulations, if you followed the steps so far until here. You will be able to see a new issue with @mention in your repo or any new repo you create under your organization.
 
 ![Alt text](/img/repo-created.png?raw=true "ngrok terminal output")
 
