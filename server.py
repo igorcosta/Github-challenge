@@ -3,7 +3,6 @@ from github import Github
 from flask import request
 import requests
 import json
-import curlify
 import os
 
 app = Flask(__name__)
@@ -41,11 +40,8 @@ def respond():
             createBranchProtection(git_data['repository']['owner']['login'],git_data['repository']['name'], default_branch)
     return Response(status=200)
 
-def createBranchProtection(owner,repo,branch,review_number=3):
-    print("hello igor")
+def createBranchProtection(owner,repo,branch,review_number=5):
     url = 'https://api.github.com/repos/{}/{}/branches/{}/protection'.format(owner,repo, branch)
-    print("Protection URL \n\n")
-    print(url)
     headers = {"Authorization": "token {}".format(git_token), "Accept": "application/vnd.github.luke-cage-preview+json"}
     data = {
   "required_status_checks": {
@@ -81,7 +77,7 @@ def createBranchProtection(owner,repo,branch,review_number=3):
   }
 }
     r = requests.put(url, headers=headers, data=json.dumps(data))
-    print(curlify.to_curl(r.request))
+    return
 
 
 def createGitHubIssue(repoName, title, body=None, assignee=None, labels=None):
