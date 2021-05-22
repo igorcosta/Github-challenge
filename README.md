@@ -25,26 +25,58 @@ It's super simple web application, doesn't use docker or anything like that, the
 
 ### Setup
 
-1. Fork and clone this repository to your local machine.
-2. Open the terminal and start ngrok server, _this will be used to create a tunnel between your local machine and a webhook from Github._
+1. Download and install the required software.
+2. Fork and clone this repository into your local machine.
+3. Open the terminal and start ngrok server, __this will be used to create a tunnel between your local machine the internet, allowing you to reach GitHub API.
 
 ```bash
-./ngrok http 8080
+./ngrok http 5000
 ```
 
-1. Once you have your ngrok tunnel working you will need to start the **server.py** server, which is the main component here.
+--------------------------------------------------------------------------------
 
-On your terminal window, type the following command.
+**NOTE** _ngrok and Flask needs to run on the same port number 5000, so ngrok will works as a proxy for your flask app._
+
+--------------------------------------------------------------------------------
+
+1. Once you have your ngrok tunnel running, you will need to start the **server.py** server, which is the main component here that receives webhook requests from Github.
+
+Open a new terminal window and typ the following commands.
 
 ```bash
 pip3 install -r requirements.txt
 export FLASK_APP=server.py
+export FLASK_ENV=development
 pyton3 -m flask run
 ```
 
-### Configuration
+If you see the output below, you're all set to go to the next step.
 
-TBD
+```bash
+ * Serving Flask app 'server.py' (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: xxx-xxx-xxx
+```
+
+### Testing
+
+Now that you completed the setup, let's test our solution.
+
+Open the browser tab at
+
+```bash
+http://localhost:4040/inspect/http
+```
+
+Now create a new repository in your github organisation:
+
+```bash
+https://github.com/organizations/your-awsome-little-inc/repositories/new
+```
 
 ### Contributing
 
