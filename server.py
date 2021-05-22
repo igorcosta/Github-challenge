@@ -8,12 +8,11 @@ import os
 app = Flask(__name__)
 
 git_token = os.environ['GITHUB_TOKEN']
-
 repo_name = ''
 default_branch =''
-default_user = 'igorcosta'
+default_user = os.environ['DEFAULT_USER']
 
-issueResponse = """
+issue_Template = """
 
  Hi @{}, the security settings for your main branch has been changed!
  This will keep your repository safe and maintain a high standards.
@@ -22,7 +21,7 @@ issueResponse = """
 **Changes**:
 
  - Admin branch protection: You have absolute control over this branch.
- - Pull request protection: Auto approval of pull requests, requires at least 3 approving reviews.
+ - Pull request protection: Auto approval of pull requests, requires at least 5 approving reviews.
 
 """.format(default_user)
 
@@ -36,11 +35,12 @@ def respond():
             if git_data['repository']:
                 repo_name = git_data['repository']['full_name'];
                 default_branch = git_data['repository']['default_branch']
-                createGitHubIssue(repo_name, 'Updated branch rotection', issueResponse, default_user, 'enhancement');
+                createGitHubIssue(repo_name, 'Updated branch rotection', issue_Template, default_user, 'enhancement');
             createBranchProtection(git_data['repository']['owner']['login'],git_data['repository']['name'], default_branch)
     return Response(status=200)
 
 def createBranchProtection(owner,repo,branch,review_number=5):
+    '''This is still in preview mode'''
     url = 'https://api.github.com/repos/{}/{}/branches/{}/protection'.format(owner,repo, branch)
     headers = {"Authorization": "token {}".format(git_token), "Accept": "application/vnd.github.luke-cage-preview+json"}
     data = {
