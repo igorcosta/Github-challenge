@@ -35,7 +35,7 @@ def respond():
             if git_data['repository']:
                 repo_name = git_data['repository']['full_name'];
                 default_branch = git_data['repository']['default_branch']
-                createGitHubIssue(repo_name, 'Updated branch rotection', issue_Template, default_user, 'enhancement');
+                createGitHubIssue(repo_name, 'Updated branch protection', issue_Template, default_user, 'enhancement');
             createBranchProtection(git_data['repository']['owner']['login'],git_data['repository']['name'], default_branch)
     return Response(status=200)
 
